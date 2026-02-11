@@ -28,10 +28,10 @@ public class TargetedAd {
         {
           isTargeted = true;
           
-          if (targetWord.toLowerCase().contains("dog") || targetWord.toLowerCase().contains("pup")) {
-              specificPet = "dog";
-          } else if (targetWord.toLowerCase().contains("cat") || targetWord.toLowerCase().contains("kit")) {
-              specificPet = "cat";
+          if (targetWord.toLowerCase().contains("targetWords.txt") || targetWord.toLowerCase().contains("targetWords.txt")) {
+              specificPet = "tiger";
+          } else if (targetWord.toLowerCase().contains("gray") || targetWord.toLowerCase().contains("dog")) {
+              specificPet = "wolf";
           }
         }
         targetWord = collector.getNextTargetWord();
@@ -51,6 +51,6 @@ public class TargetedAd {
       currentPost = collector.getNextPost();
     }
     
-    System.out.println("Targeted advertisement file 'targetedAds.txt' has been generated.");
+    System.out.println("Targeted advertisement 'targetedAds.txt' has been made.");
   }
 }
