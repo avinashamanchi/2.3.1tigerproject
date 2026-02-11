@@ -8,49 +8,75 @@ public class TargetedAd {
     DataCollector collector = new DataCollector();
     collector.setData("socialMediaPosts.txt", "targetWords.txt");
 
-    String targetedUsernames = "";
+    String targetedUsers = "";
+    String post = collector.getNextPost();
     
-    String currentPost = collector.getNextPost();
-
-    while (!currentPost.equals("NONE"))
+    while (!post.equals("NONE")) 
     {
-      int firstSpace = currentPost.indexOf(" ");
-      String username = currentPost.substring(0, firstSpace);
-      String postContent = currentPost.substring(firstSpace + 1).toLowerCase();
+      int firstSpace = post.indexOf(" ");
+      String username = post.substring(0, firstSpace);
+      String lowerPost = post.toLowerCase();
       
-      boolean isTargeted = false;
-      String specificPet = "pet"; 
-      
+      boolean found = false;
       String targetWord = collector.getNextTargetWord();
-      while (!targetWord.equals("NONE"))
+
+      while (!targetWord.equals("NONE")) 
       {
-        if (postContent.contains(targetWord.toLowerCase()))
+        String lowerTarget = targetWord.toLowerCase();
+
+        if (lowerPost.indexOf(lowerTarget) >= 0) 
         {
-          isTargeted = true;
-          
-          if (targetWord.toLowerCase().contains("targetWords.txt") || targetWord.toLowerCase().contains("targetWords.txt")) {
-              specificPet = "tiger";
-          } else if (targetWord.toLowerCase().contains("gray") || targetWord.toLowerCase().contains("dog")) {
-              specificPet = "wolf";
+          if (found == false) {
+            targetedUsers += username + " ";
+            found = true; 
           }
         }
+        
         targetWord = collector.getNextTargetWord();
       }
-
-      if (isTargeted)
-      {
-        if (!targetedUsernames.contains(username))
-        {
-          targetedUsernames += username + " ";
-          
-          String advertisement = "Your furry friend will love our " + specificPet + " food!";
-          collector.prepareAdvertisement("targetedAds.txt", username, advertisement);
-        }
-      }
       
-      currentPost = collector.getNextPost();
+      post = collector.getNextPost();
     }
-    
-    System.out.println("Targeted advertisement 'targetedAds.txt' has been made.");
+
+    String adContent = "yoooooo check out our new premium tiger meats! GET THEM WHILE YOU CAN BRUDAAAAA!";
+    collector.prepareAdvertisement("prepareAdvertisement.txt", targetedUsers, adContent);
+
+    //just for us to know that we actually created it
+    System.out.println("targeted advertisement file is created");
+    System.out.println("------------------------------");
+    System.out.println("targeted users: " + targetedUsers);
+    System.out.println("------------------------------");
+    System.out.println("advertisement content: " + adContent);
+    System.out.println("------------------------------");
   }
 }
+    /*  
+     * TODO:
+     * PREPARATION WORK
+     * (1) Create a file called targetWords.txt. Populate this file with words on each line that
+     *     you think would determine if a user is a dog or cat owner.
+     * 
+     * PROGRAMMING
+     * (2) Create a new DataCollector object and set the data to "socialMediaPostsSmall.txt" and "targetWords.txt"
+     *     Important: Use the socialMedialPostsSmall to create your algorithm. Using a small file will help you 
+     *     generate your solution quicker and give you the ability to double check your work.
+     * (3) Create a String variable to hold the names of all the user. (The first word of every post is 
+     *     a person's username)
+     * (4) Compare each user's post to each target word. If a user mentions a target word, add their username to 
+     *     the String of users. Separate usernames with a space. 
+     *         Hint: You can use loops to look through each word. 
+     *         Hint2: You can use indexOf to check if a word is in a user post. 
+     * (5) Once you have all the users, use your DataCollector's prepareAdvertisement method to prepare a file 
+     *     with all users and the advertisement you will send them.
+     *         Additional Info: The prepareAdvertisement creates a new file on your computer. Check the posts of
+     *         some of the usernames to make sure your algorithm worked.
+     * 
+     * THE FINAL SOLUTION
+     * (6) Your solution should work with the socialMedialPostsSmall.txt. Modify your DataCollector initialization
+     *    so you use the socialMediaPosts.txt. You should now have a larger file of users to target.
+     */
+
+
+    /* your code here */
+    
+  
