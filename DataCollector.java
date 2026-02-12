@@ -5,26 +5,25 @@
  * 6/1/2019
  * Copyright(c) 2019 PLTW to present. All rights reserved
  */
-import java.util.Scanner;
-import java.io.File;
-import java.util.ArrayList;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * A DataCollector class to manage social media posts
  */
 public class DataCollector
 {
-  private ArrayList<String> socialMediaPosts;
-  private ArrayList<String> targetWords;
+  private final ArrayList<String> socialMediaPosts;
+  private final ArrayList<String> targetWords;
   private Scanner sc;
   private int currentPost;
   private int currentTargetWord;
 
   public DataCollector()
   {
-    socialMediaPosts = new ArrayList<String>();
-    targetWords = new ArrayList<String>();
+    socialMediaPosts = new ArrayList<>();
+    targetWords = new ArrayList<>();
     currentPost = 0;
     currentTargetWord = 0;
   }
@@ -114,14 +113,15 @@ public class DataCollector
   {
     try
     {
-      FileWriter fw = new FileWriter(filename);
-      // Strin method split splits a string based on the provided token
-      // and returns an array of individual substrings
-      for (String un : usernames.split(" "))
-      {
-          fw.write("@" + un + " " + advertisement +"\n");
-      }
-      fw.close();
+        // Strin method split splits a string based on the provided token
+        // and returns an array of individual substrings
+        try (FileWriter fw = new FileWriter(filename)) {
+            // Strin method split splits a string based on the provided token
+            // and returns an array of individual substrings
+            for (String un : usernames.split(" "))
+            {
+                fw.write("@" + un + " " + advertisement +"\n");
+            } }
     }
     catch (IOException e)
     {

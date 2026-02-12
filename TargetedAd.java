@@ -24,7 +24,7 @@ public class TargetedAd {
       {
         String lowerTarget = targetWord.toLowerCase();
 
-        if (lowerPost.indexOf(lowerTarget) >= 0) 
+        if (lowerPost.contains(lowerTarget)) 
         {
           if (found == false) {
             targetedUsers += username + " ";
@@ -38,10 +38,9 @@ public class TargetedAd {
       post = collector.getNextPost();
     }
 
-    String adContent = "yoooooo check out our new premium tiger meats! GET THEM WHILE YOU CAN BRUDAAAAA!";
+    String adContent = "food food food food, YOU NEED MEAT, woah woah, RAW MEAT, not better, YOUR TIGER NEEDS RAW MEAT. DISCOUNT NOW GET WHILE YOU CAN";
     collector.prepareAdvertisement("prepareAdvertisement.txt", targetedUsers, adContent);
 
-    //just for us to know that we actually created it
     System.out.println("targeted advertisement file is created");
     System.out.println("------------------------------");
     System.out.println("targeted users: " + targetedUsers);
